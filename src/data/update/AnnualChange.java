@@ -1,23 +1,28 @@
 package data.update;
 
 import children.Child;
+import enums.GiftStrategy;
 import gifts.Gift;
+import utils.GiftPair;
 
 import java.util.List;
 
 public class AnnualChange {
     private Double newSantaBudget;
-    private List<Gift> newGifts;
+    private List<GiftPair> newGifts;
     private List<Child> newChildren;
     private List<ChildrenUpdate> childrenUpdates;
+    private GiftStrategy strategy;
 
-    public AnnualChange(final Double newSantaBudget, final List<Gift> newGifts,
+    public AnnualChange(final Double newSantaBudget, final List<GiftPair> newGifts,
                         final List<Child> newChildren,
-                        final List<ChildrenUpdate> childrenUpdates) {
+                        final List<ChildrenUpdate> childrenUpdates,
+                        final GiftStrategy strategy) {
         this.newSantaBudget = newSantaBudget;
         this.newGifts = newGifts;
         this.newChildren = newChildren;
         this.childrenUpdates = childrenUpdates;
+        this.strategy = strategy;
     }
 
     /**
@@ -40,7 +45,7 @@ public class AnnualChange {
      * getter
      * @return
      */
-    public List<Gift> getNewGifts() {
+    public List<GiftPair> getNewGifts() {
         return newGifts;
     }
 
@@ -48,7 +53,7 @@ public class AnnualChange {
      * setter
      * @param newGifts
      */
-    public void setNewGifts(final List<Gift> newGifts) {
+    public void setNewGifts(final List<GiftPair> newGifts) {
         this.newGifts = newGifts;
     }
 
@@ -82,5 +87,21 @@ public class AnnualChange {
      */
     public void setChildrenUpdates(final List<ChildrenUpdate> childrenUpdates) {
         this.childrenUpdates = childrenUpdates;
+    }
+
+    /**
+     * getter
+     * @return
+     */
+    public GiftStrategy getStrategy() {
+        return strategy;
+    }
+
+    /**
+     * setter
+     * @param strategy
+     */
+    public void setStrategy(final GiftStrategy strategy) {
+        this.strategy = strategy;
     }
 }

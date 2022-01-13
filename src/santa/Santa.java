@@ -1,14 +1,15 @@
 package santa;
 
 import gifts.Gift;
+import utils.GiftPair;
 
 import java.util.List;
 
 public class Santa {
     private Double santaBudget;
-    private List<Gift> santaGiftsList;
+    private List<GiftPair> santaGiftsList;
 
-    public Santa(final Double santaBudget, final List<Gift> santaGiftsList) {
+    public Santa(final Double santaBudget, final List<GiftPair> santaGiftsList) {
         this.santaBudget = santaBudget;
         this.santaGiftsList = santaGiftsList;
     }
@@ -33,7 +34,7 @@ public class Santa {
      * getter
      * @return
      */
-    public List<Gift> getSantaGiftsList() {
+    public List<GiftPair> getSantaGiftsList() {
         return santaGiftsList;
     }
 
@@ -41,7 +42,7 @@ public class Santa {
      * setter
      * @param santaGiftsList
      */
-    public void setSantaGiftsList(final List<Gift> santaGiftsList) {
+    public void setSantaGiftsList(final List<GiftPair> santaGiftsList) {
         this.santaGiftsList = santaGiftsList;
     }
 }

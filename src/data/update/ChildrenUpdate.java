@@ -1,6 +1,7 @@
 package data.update;
 
 import enums.Category;
+import enums.ElvesType;
 
 import java.util.List;
 
@@ -8,12 +9,15 @@ public class ChildrenUpdate {
     private Integer id;
     private Double niceScore;
     private List<Category> giftPreferences;
+    private ElvesType elf;
 
     public ChildrenUpdate(final Integer id, final Double niceScore,
-                          final List<Category> giftPreferences) {
+                          final List<Category> giftPreferences,
+                          final ElvesType elf) {
         this.id = id;
         this.niceScore = niceScore;
         this.giftPreferences = giftPreferences;
+        this.elf = elf;
     }
 
     /**
@@ -62,5 +66,21 @@ public class ChildrenUpdate {
      */
     public void setGiftPreferences(final List<Category> giftPreferences) {
         this.giftPreferences = giftPreferences;
+    }
+
+    /**
+     * getter
+     * @return
+     */
+    public ElvesType getElf() {
+        return elf;
+    }
+
+    /**
+     * setter
+     * @param elf
+     */
+    public void setElf(final ElvesType elf) {
+        this.elf = elf;
     }
 }

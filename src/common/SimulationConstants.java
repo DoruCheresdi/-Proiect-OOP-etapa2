@@ -32,6 +32,10 @@ public final class SimulationConstants {
     public static final int BEGGINING_AGE_KID = 5;
     public static final int BEGGINING_AGE_TEEN = 12;
     public static final Double BABY_SCORE = 10d;
+    public static final String NICE_SCORE_BONUS = "niceScoreBonus";
+    public static final String ELF = "elf";
+    public static final String QUANTITY = "quantity";
+    public static final String STRATEGY = "strategy";
 
     private SimulationConstants() {
         //constructor for checkstyle

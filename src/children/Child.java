@@ -4,6 +4,7 @@ import common.SimulationConstants;
 import enums.Category;
 import enums.ChildType;
 import enums.Cities;
+import enums.ElvesType;
 import gifts.Gift;
 
 import java.util.ArrayList;
@@ -20,10 +21,13 @@ public class Child {
     private Double assignedBudget;
     private List<Category> preferences;
     private List<Gift> receivedGifts;
+    private Double niceScoreBonus;
+    private ElvesType elf;
 
     public Child(final Integer id, final Integer age, final String lastName,
                  final String firstName, final Cities city,
-                 final Double niceScore, final List<Category> preferences) {
+                 final Double niceScore, final List<Category> preferences,
+                 final Double niceScoreBonus, final ElvesType elf) {
         this.id = id;
         this.age = age;
         this.lastName = lastName;
@@ -32,6 +36,8 @@ public class Child {
         niceScoreHistory = new ArrayList<>();
         niceScoreHistory.add(niceScore);
         this.preferences = preferences;
+        this.niceScoreBonus = niceScoreBonus;
+        this.elf = elf;
     }
 
     /**
@@ -223,5 +229,37 @@ public class Child {
      */
     public void setReceivedGifts(final List<Gift> receivedGifts) {
         this.receivedGifts = receivedGifts;
+    }
+
+    /**
+     * getter
+     * @return
+     */
+    public Double getNiceScoreBonus() {
+        return niceScoreBonus;
+    }
+
+    /**
+     * setter
+     * @param niceScoreBonus
+     */
+    public void setNiceScoreBonus(final Double niceScoreBonus) {
+        this.niceScoreBonus = niceScoreBonus;
+    }
+
+    /**
+     * getter
+     * @return
+     */
+    public ElvesType getElf() {
+        return elf;
+    }
+
+    /**
+     * setter
+     * @param elf
+     */
+    public void setElf(final ElvesType elf) {
+        this.elf = elf;
     }
 }

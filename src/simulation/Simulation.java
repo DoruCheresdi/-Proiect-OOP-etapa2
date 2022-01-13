@@ -3,6 +3,7 @@ package simulation;
 import children.Child;
 import common.SimulationConstants;
 import data.SimulationData;
+import enums.GiftStrategy;
 import fileio.Writer;
 
 import java.util.ArrayList;
@@ -23,10 +24,11 @@ public class Simulation {
         SimulationData simulationData = SimulationData.getInstance();
         int numberOfYears = simulationData.getNumberOfYears();
         for (int year = 0; year <= numberOfYears; year++) {
+            GiftStrategy strategyToUse;
             if (year != 0) {
                 // update simulation data for a certain year:
                 SimulationUpdater simulationUpdater = new SimulationUpdater();
-                simulationUpdater.updateSimulation(year);
+                strategyToUse = simulationUpdater.updateSimulation(year);
             } else {
                 removeAdults();
             }

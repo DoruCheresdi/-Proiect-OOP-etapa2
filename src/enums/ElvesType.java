@@ -22,4 +22,26 @@ public enum ElvesType {
     ElvesType(final String value) {
         this.value = value;
     }
+
+    /**
+     * returns the ElvesType entity with the given value string
+     * @param value
+     * @return
+     */
+    public static ElvesType elvesTypeOfValue(final String value) {
+        for (ElvesType e : values()) {
+            if (e.value.equals(value)) {
+                return e;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * getter
+     * @return
+     */
+    public String getValue() {
+        return value;
+    }
 }

@@ -7,12 +7,15 @@ import data.update.AnnualChange;
 import data.update.ChildrenUpdate;
 import enums.Category;
 import enums.Cities;
+import enums.ElvesType;
+import enums.GiftStrategy;
 import gifts.Gift;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import santa.Santa;
+import utils.GiftPair;
 import utils.Utils;
 
 import java.io.FileReader;
@@ -38,7 +41,7 @@ public class InputReader {
         int numberOfYears = 0;
         List<AnnualChange> annualChangeList = new ArrayList<>();
         List<Child> children = new ArrayList<>();
-        List<Gift> gifts = new ArrayList<>();
+        List<GiftPair> gifts = new ArrayList<>();
         Double santaBudget = 0d;
         Santa santa;
 
@@ -67,14 +70,18 @@ public class InputReader {
             // parse the gifts json:
             if (giftsJson != null) {
                 for (Object giftJson : giftsJson) {
-                    gifts.add(new Gift(
-                            (String) ((JSONObject) giftJson)
-                                    .get(SimulationConstants.PRODUCT_NAME),
-                            ((Number) ((JSONObject) giftJson)
-                                    .get(SimulationConstants.PRICE))
-                                    .doubleValue(),
-                            Category.categoryOfValue((String) ((JSONObject) giftJson)
-                                    .get(SimulationConstants.CATEGORY))
+                    gifts.add(new GiftPair(
+                            new Gift(
+                                (String) ((JSONObject) giftJson)
+                                        .get(SimulationConstants.PRODUCT_NAME),
+                                ((Number) ((JSONObject) giftJson)
+                                        .get(SimulationConstants.PRICE))
+                                        .doubleValue(),
+                                Category.categoryOfValue((String) ((JSONObject) giftJson)
+                                        .get(SimulationConstants.CATEGORY))
+                            ),
+                            ((Long) ((JSONObject) giftJson).get(SimulationConstants.QUANTITY))
+                                    .intValue()
                     ));
                 }
             }
@@ -99,21 +106,26 @@ public class InputReader {
             Double newSantaBudget = ((Number) ((JSONObject) changeJson)
                     .get(SimulationConstants.NEW_SANTA_BUDGET))
                     .doubleValue();
+            GiftStrategy strategy = GiftStrategy.giftStrategyOfValue((String) ((JSONObject) changeJson)
+                    .get(SimulationConstants.STRATEGY));
 
             // parse new gifts:
-            List<Gift> newGifts = new ArrayList<>();
+            List<GiftPair> newGifts = new ArrayList<>();
             JSONArray newGiftsJSON = (JSONArray) ((JSONObject) changeJson)
                     .get(SimulationConstants.NEW_GIFTS);
             for (Object newGiftJson: newGiftsJSON) {
-                newGifts.add(new Gift(
-                        (String) ((JSONObject) newGiftJson)
-                                .get(SimulationConstants.PRODUCT_NAME),
-                        ((Number) ((JSONObject) newGiftJson)
-                                .get(SimulationConstants.PRICE))
-                                .doubleValue(),
-                        Category.categoryOfValue((String) ((JSONObject) newGiftJson)
-                                .get(SimulationConstants.CATEGORY))
-                ));
+                newGifts.add(new GiftPair(
+                        new Gift(
+                            (String) ((JSONObject) newGiftJson)
+                                    .get(SimulationConstants.PRODUCT_NAME),
+                            ((Number) ((JSONObject) newGiftJson)
+                                    .get(SimulationConstants.PRICE))
+                                    .doubleValue(),
+                            Category.categoryOfValue((String) ((JSONObject) newGiftJson)
+                                    .get(SimulationConstants.CATEGORY))),
+                        ((Long) ((JSONObject) newGiftJson).get(SimulationConstants.QUANTITY))
+                                .intValue()
+                        ));
             }
 
             // parse new children:
@@ -147,7 +159,9 @@ public class InputReader {
                         ((Long) ((JSONObject) childUpdateJson).get(SimulationConstants.ID))
                                 .intValue(),
                         newNiceScore,
-                        childPreferences
+                        childPreferences,
+                        ElvesType.elvesTypeOfValue((String) ((JSONObject) childUpdateJson)
+                                .get(SimulationConstants.ELF))
                 ));
             }
             // add data to annual changes list:
@@ -155,7 +169,8 @@ public class InputReader {
                     newSantaBudget,
                     newGifts,
                     newChildren,
-                    childrenUpdates
+                    childrenUpdates,
+                    strategy
             ));
         }
         return annualChangeList;
@@ -180,7 +195,12 @@ public class InputReader {
                     ((Number) ((JSONObject) childJson)
                             .get(SimulationConstants.NICE_SCORE))
                             .doubleValue(),
-                    childPreferences
+                    childPreferences,
+                    ((Number) ((JSONObject) childJson)
+                            .get(SimulationConstants.NICE_SCORE_BONUS))
+                            .doubleValue(),
+                    ElvesType.elvesTypeOfValue((String) ((JSONObject) childJson)
+                            .get(SimulationConstants.ELF))
             ));
         }
     }

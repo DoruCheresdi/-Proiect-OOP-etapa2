@@ -6,7 +6,9 @@ import data.SimulationData;
 import data.update.AnnualChange;
 import data.update.ChildrenUpdate;
 import enums.Category;
+import enums.GiftStrategy;
 import gifts.Gift;
+import utils.GiftPair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ public class SimulationUpdater {
      * Method to update and add data to database
      * @param year
      */
-    public void updateSimulation(final int year) {
+    public GiftStrategy updateSimulation(final int year) {
         // add new data to database:
         // the index in the annualChangesList:
         int index = year - 1;
@@ -48,7 +50,7 @@ public class SimulationUpdater {
         updateChildren(annualChange.getChildrenUpdates());
 
         // add new gifts:
-        for (Gift newGift : annualChange.getNewGifts()) {
+        for (GiftPair newGift : annualChange.getNewGifts()) {
             simulationData.getSanta().getSantaGiftsList().add(newGift);
         }
 
@@ -56,6 +58,7 @@ public class SimulationUpdater {
         // change budget for this year:
         simulationData.getSanta().setSantaBudget(annualChange.getNewSantaBudget());
 
+        return annualChange.getStrategy();
     }
 
     private void updateChildren(final List<ChildrenUpdate> childrenUpdateList) {
@@ -70,6 +73,9 @@ public class SimulationUpdater {
                     childToUpdate.getNiceScoreHistory()
                             .add(newNiceScore);
                 }
+
+                // update elf:
+                childToUpdate.setElf(childrenUpdate.getElf());
 
                 // make each preference element in the update list unique:
                 ArrayList<Integer> elementsToRemove = new ArrayList<Integer>();
