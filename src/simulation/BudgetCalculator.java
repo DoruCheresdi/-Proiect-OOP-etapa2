@@ -2,6 +2,7 @@ package simulation;
 
 import children.Child;
 import data.SimulationData;
+import enums.ElvesType;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -32,6 +33,21 @@ public class BudgetCalculator {
         for (Child child : simulationData.getChildren()) {
             Double niceScoreChild = child.getAverageScore();
             child.setAssignedBudget(budgetUnit * niceScoreChild);
+        }
+
+        // apply elf specific bonus:
+        for (Child child :
+                simulationData.getChildren()) {
+            if (child.getElf() == ElvesType.BLACK) {
+                Double budget = child.getAssignedBudget();
+                budget = budget - budget * 30 / 100;
+                child.setAssignedBudget(budget);
+            }
+            if (child.getElf() == ElvesType.PINK) {
+                Double budget = child.getAssignedBudget();
+                budget = budget + budget * 30 / 100;
+                child.setAssignedBudget(budget);
+            }
         }
     }
 }

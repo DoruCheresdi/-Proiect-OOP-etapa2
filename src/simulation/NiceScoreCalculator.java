@@ -24,6 +24,12 @@ public class NiceScoreCalculator {
 
             // use strategy using Strategy Pattern
             niceScoreStrategy.calculateScore(child);
+
+            // use builder pattern to apply bonus:
+            NiceScore niceScore = new NiceScore.Builder(child.getAverageScore())
+                    .niceScoreBonus(child.getNiceScoreBonus())
+                    .build();
+            child.setAverageScore(niceScore.getNiceScore());
         }
     }
 }
