@@ -1,0 +1,36 @@
+Doru Cheresdi
+doru.cheresdi@gmail.com
+
+Programare Orientata pe Obiecte
+Proiect - Etapa 2 - Santa Claus is coming to ACS students
+
+# Design Patterns used:
+- Singleton Pattern for the database
+- Strategy Pattern for the average nice score calculation and for the gift
+giving strategies
+- Factory Pattern for creating NiceScoreStrategy objects
+- Builder Pattern for applying the bonus to averageNiceScore of each child
+
+# About updates of the flow of the program in Etapa2
+Data input is adapted to read the new data that the program needs.
+
+After the average nice score is calculated, the bonus is applied using
+the builder pattern.
+
+After each child's budget is calculated, the bonuses for the Pink and Black
+elves are applied in the BudgetCalculator class.
+
+The gift giving functionality is expanded, now each year has a certain strategy
+used to give gifts. Each strategy is assigned a class that extends the abstract
+class GiftGivingStrategy which contains the method giveGifts used by the
+GiftGiver to assign gifts to all children and an auxiliary function
+giveGiftsToChildren that assigns gifts to the children in the given ArrayList
+in order.
+
+For the NiceScoreCityStrategy, a list is created containing a city-score pair
+containing the cities that have at least one child living in them and the
+average score of those children. This list is used to determine which city
+is visited first.
+
+After the strategy has assigned gifts to children, the yellow elf is applied to
+the children that were assigned it.

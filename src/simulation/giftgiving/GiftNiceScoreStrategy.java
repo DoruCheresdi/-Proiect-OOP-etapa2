@@ -6,7 +6,7 @@ import data.SimulationData;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GiftNiceScoreStrategy implements GiftGivingStrategy {
+public class GiftNiceScoreStrategy extends GiftGivingStrategy {
     /**
      * Method to give gifts to children
      */
@@ -26,6 +26,6 @@ public class GiftNiceScoreStrategy implements GiftGivingStrategy {
                 .collect(Collectors.toList());
 
         // assign gifts to each child:
-        GiftGiver.giveGiftsToChildren(sortedChildList);
+        giveGiftsToChildren(sortedChildList);
     }
 }
