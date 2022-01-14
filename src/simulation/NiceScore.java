@@ -1,6 +1,8 @@
 package simulation;
 
-public class NiceScore {
+import common.SimulationConstants;
+
+public final class NiceScore {
     private Double niceScore;
 
     public static class Builder {
@@ -11,21 +13,31 @@ public class NiceScore {
             this.niceScore = niceScore;
         }
 
-        public Builder niceScoreBonus(final Double niceScoreBonus) {
-            this.niceScoreBonus = niceScoreBonus;
+        /**
+         * method to add niceScoreBonus
+         * @param niceScoreBonusAdd nicescore
+         * @return builder
+         */
+        public Builder niceScoreBonus(final Double niceScoreBonusAdd) {
+            this.niceScoreBonus = niceScoreBonusAdd;
             return this;
         }
 
+        /**
+         * Method to finish build
+         * @return
+         */
         public NiceScore build() {
             return new NiceScore(this);
         }
     }
 
-    private NiceScore(Builder builder) {
+    private NiceScore(final Builder builder) {
         this.niceScore = builder.niceScore;
-        this.niceScore += builder.niceScore * builder.niceScoreBonus / 100;
-        if (this.niceScore.compareTo(10d) > 0) {
-            this.niceScore = 10d;
+        this.niceScore += builder.niceScore * builder.niceScoreBonus
+                / SimulationConstants.ONE_HUNDRED;
+        if (this.niceScore.compareTo(SimulationConstants.MAX_SCORE) > 0) {
+            this.niceScore = SimulationConstants.MAX_SCORE;
         }
     }
 

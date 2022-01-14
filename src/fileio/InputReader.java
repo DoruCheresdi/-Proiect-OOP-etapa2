@@ -106,7 +106,8 @@ public class InputReader {
             Double newSantaBudget = ((Number) ((JSONObject) changeJson)
                     .get(SimulationConstants.NEW_SANTA_BUDGET))
                     .doubleValue();
-            GiftStrategy strategy = GiftStrategy.giftStrategyOfValue((String) ((JSONObject) changeJson)
+            GiftStrategy strategy = GiftStrategy
+                    .giftStrategyOfValue((String) ((JSONObject) changeJson)
                     .get(SimulationConstants.STRATEGY));
 
             // parse new gifts:

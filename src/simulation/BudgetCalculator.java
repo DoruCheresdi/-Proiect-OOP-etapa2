@@ -1,6 +1,7 @@
 package simulation;
 
 import children.Child;
+import common.SimulationConstants;
 import data.SimulationData;
 import enums.ElvesType;
 
@@ -36,16 +37,17 @@ public class BudgetCalculator {
         }
 
         // apply elf specific bonus:
-        for (Child child :
-                simulationData.getChildren()) {
+        for (Child child : simulationData.getChildren()) {
             if (child.getElf() == ElvesType.BLACK) {
                 Double budget = child.getAssignedBudget();
-                budget = budget - budget * 30 / 100;
+                budget = budget - budget * SimulationConstants.THIRTY
+                        / SimulationConstants.ONE_HUNDRED;
                 child.setAssignedBudget(budget);
             }
             if (child.getElf() == ElvesType.PINK) {
                 Double budget = child.getAssignedBudget();
-                budget = budget + budget * 30 / 100;
+                budget = budget + budget * SimulationConstants.THIRTY
+                        / SimulationConstants.ONE_HUNDRED;
                 child.setAssignedBudget(budget);
             }
         }

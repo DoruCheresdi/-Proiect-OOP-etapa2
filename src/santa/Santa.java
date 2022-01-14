@@ -1,6 +1,5 @@
 package santa;
 
-import gifts.Gift;
 import utils.GiftPair;
 
 import java.util.List;
