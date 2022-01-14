@@ -5,6 +5,7 @@ import common.SimulationConstants;
 import data.SimulationData;
 import enums.GiftStrategy;
 import fileio.Writer;
+import simulation.giftgiving.GiftGiver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,8 @@ public class Simulation {
         SimulationData simulationData = SimulationData.getInstance();
         int numberOfYears = simulationData.getNumberOfYears();
         for (int year = 0; year <= numberOfYears; year++) {
-            GiftStrategy strategyToUse;
+            // initialise id strategy for year 0:
+            GiftStrategy strategyToUse = GiftStrategy.ID;
             if (year != 0) {
                 // update simulation data for a certain year:
                 SimulationUpdater simulationUpdater = new SimulationUpdater();
@@ -42,7 +44,7 @@ public class Simulation {
 
             // assign gifts to children
             GiftGiver giftGiver = new GiftGiver();
-            giftGiver.giveGiftsToChildren();
+            giftGiver.giveGiftsToChildren(strategyToUse);
 
             // add children list to output JSON
             writer.addChildrenJsonToOutput(simulationData.getChildren());

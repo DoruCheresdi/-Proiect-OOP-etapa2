@@ -13,6 +13,13 @@ public class GiftPair {
 
     /**
      * getter
+     */
+    public Double getPrice() {
+        return gift.getPrice();
+    }
+
+    /**
+     * getter
      * @return
      */
     public Gift getGift() {
